@@ -49,14 +49,6 @@ services:
 #          - ./simulation-map.txt:/opt/simulation-map.txt
 #        command: "/usr/bin/opendlv-sim-adc-bbblue --map-file=/opt/simulation-map.txt --x=0.0 --y=-0.1 --yaw=-1.57 --cid=111 --freq=10 --frame-id=0 --id=3"
 
-    ui-default:
-        image: chalmersrevere/opendlv-ui-default-amd64:v0.0.2
-        volumes:
-          - ./simulation-map.txt:/srv/http/simulation-map.txt
-        ports:
-        - "8000:8000"
-        command: "--cid=111"
-
     vehicle-view:
         container_name: opendlv-vehicle-view
         image: chalmersrevere/opendlv-vehicle-view-multi:v0.0.41
@@ -64,9 +56,11 @@ services:
         volumes:
         - ~/recordings:/opt/vehicle-view/recordings
         - /var/run/docker.sock:/var/run/docker.sock
+        - ./simulation-map.txt:/opt/vehicle-view/simulation-map.txt
         environment:
         - OD4SESSION_CID=111
         - OPENDLV_VEHICLE_VIEW_PLATFORM=Kiwi
+        - OPENDLV_VEHICLE_VIEW_ENABLE_KIWI_SIMULATION=1
         ports:
         - "8081:8081"
 
