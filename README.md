@@ -85,7 +85,7 @@ Then, you need to activate the Javascript Console in your web-browser; for Safar
 
 The source code in the code area is executed with 10Hz and hence, the sensor values are updates ten times per seconds as well as the control values are sent to the vehicle by 10 times per second. Furthermore, the code area does not have to possibility to store a variable value throughout one iteration; i.e., a statement like `var oldValue = rearSensor;` and later trying to evaluate the old value from the previous iteration of the code does not work.
 
-Instead, you need to work with so called `sessionStorage` objects [API](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage) that are persistent through one iteration. You could use it for example as follows:
+Instead, you need to work with so called `sessionStorage` objects (cf. [API](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage)) that are persistent through one iteration. You could use it for example as follows:
 
 ```Javascript
 // Initialize sessionStorage object:
