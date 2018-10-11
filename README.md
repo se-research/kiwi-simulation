@@ -83,6 +83,10 @@ Then, you need to activate the Javascript Console in your web-browser; for Safar
 
 ### Hints
 
+If you need to restart the simulation, go to the terminal where you ran `docker-compose`. Press `Ctrl-C` and wait for the command prompt. Then, run `docker-compose -f docker-compose.yml down` to end the simulation. Then, you can restart the simulation with `docker-compose -f docker-compose.yml up` again. Afterwards, simply refresh your web-browser.
+
+If you want to try one of the other scenarios, stop the simulation and simply delete the file `simulation-map.txt`. Then, copy one of the other scenarios `emptry.txt` or `two-cars.txt` and name the copied file `simulation-map.txt`. Afterwards, restart the simulation again and refresh your web-browser.
+
 The source code in the code area is executed with 10Hz and hence, the sensor values are updates ten times per seconds as well as the control values are sent to the vehicle by 10 times per second. Furthermore, the code area does not have to possibility to store a variable value throughout one iteration; i.e., a statement like `var oldValue = rearSensor;` and later trying to evaluate the old value from the previous iteration of the code does not work.
 
 Instead, you need to work with so called `sessionStorage` objects (cf. [API](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage)) that are persistent through one iteration. You could use it for example as follows:
