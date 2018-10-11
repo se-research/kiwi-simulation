@@ -33,28 +33,12 @@ services:
           - ./simulation-map.txt:/opt/simulation-map.txt
         command: "/usr/bin/opendlv-sim-ultrasonic-srf08 --map-file=/opt/simulation-map.txt --x=0.0 --y=-0.1 --yaw=-1.57 --cid=111 --freq=10 --frame-id=0 --id=3"
 
-# Broken?
-#    sim-adc-bbblue-left:
-#        image: chalmersrevere/opendlv-sim-adc-bbblue-amd64:v0.0.4
-#        network_mode: "host"
-#        volumes:
-#          - ./simulation-map.txt:/opt/simulation-map.txt
-#        command: "/usr/bin/opendlv-sim-adc-bbblue --map-file=/opt/simulation-map.txt --x=0.0 --y=0.1 --yaw=1.57 --cid=111 --freq=10 --frame-id=0 --id=1"
-
-# Broken?
-#    sim-adc-bbblue-right:
-#        image: chalmersrevere/opendlv-sim-adc-bbblue-amd64:v0.0.4
-#        network_mode: "host"
-#        volumes:
-#          - ./simulation-map.txt:/opt/simulation-map.txt
-#        command: "/usr/bin/opendlv-sim-adc-bbblue --map-file=/opt/simulation-map.txt --x=0.0 --y=-0.1 --yaw=-1.57 --cid=111 --freq=10 --frame-id=0 --id=3"
-
     vehicle-view:
         container_name: opendlv-vehicle-view
         image: chalmersrevere/opendlv-vehicle-view-multi:v0.0.42
         restart: on-failure
         volumes:
-        - ~/recordings:/opt/vehicle-view/recordings
+        - ./:/opt/vehicle-view/recordings
         - /var/run/docker.sock:/var/run/docker.sock
         - ./simulation-map.txt:/opt/vehicle-view/simulation-map.txt
         environment:
