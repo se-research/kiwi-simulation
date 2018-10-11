@@ -32,3 +32,45 @@ In the main window, you are seeing four tabs: `Overview`, `Messages`, `Plot`, an
 Next, click on the tab `Simulation` and you will see the currently active scenario:
 
 ![Simulation](https://raw.githubusercontent.com/se-research/kiwi-simulation/master/Simulation.png)
+
+### Controlling Kiwi
+
+If you want to send steering, acceleration, or deceleration commands to the simulated Kiwi, return to the `Overview` tab and activate the button labeled `Code` on the right side; it will turn green.
+
+Next, click on the tab `Simulation` to return to the simulation view. In the code area, you see two lines:
+
+```Javascript
+// Set values to access Kiwi's motor and steering.
+actuation.motor = 0;
+actuation.steering = 0.3;
+```
+
+You can change these values to influence the behavior of the simulated Kiwi car. If you want to accelerate, you can send values like `actuation.motor = 10;`. If you want to go reverse, send `actuation.motor = -10;`. If you want to steer to left, send: `actuation.steering = 0.5;`; steering to the right is `actuation.steering = -0.5;`.
+
+### Parking Kiwi
+
+This repository contains one recording file named `CID-111-recording-2018-10-07_183647.rec` that demonstrates how the Kiwi car could be parked in the available gap. To replay that file, click on the folder icon in the top/center part where you will be presented with a page listing all available files. Select the one with the file name ending on `.rec` and click on the play button. The web-browser will return to replay view; next, click on the tab `Simulation` and observe how the car is parked.
+
+The sensor data from the four distance sensors is stored in the following four constants:
+
+```Javascript
+const frontSensor = perception.front;
+const rearSensor = perception.rear;
+const leftSensor = perception.left;
+const rightSensor = perception.right;
+```
+
+If you want to see the values, you can either change to tab `Messages` or you can print the content in Javascript:
+
+```Javascript
+const frontSensor = perception.front;
+const rearSensor = perception.rear;
+const leftSensor = perception.left;
+const rightSensor = perception.right;
+
+console.log("Front = " + frontSensor + ", Rear = " + rearSensor + ", Left = " + leftSensor + ", Right = " + rightSensor);
+```
+
+Then, you need to activate the Javascript Console in your web-browser; for Safari, click on Develop-Show JavaScript Console and for Chrome: View-Developer-JavaScript Console. You should see the print out of your values.
+
+
