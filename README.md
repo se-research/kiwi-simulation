@@ -7,6 +7,8 @@ Welcome to the repository that contains the simulation environment for the minia
 * Have `docker` installed: [Ubuntu Linux](https://docs.docker.com/install/linux/docker-ce/ubuntu/), [Windows](https://docs.docker.com/docker-for-windows/install/), [MacOS](https://docs.docker.com/docker-for-mac/install/)
 * Have `docker-compose` installed: [Instructions](https://docs.docker.com/compose/install/)
 
+---
+
 ### Getting Started
 
 After having installed `docker` and `docker-compose`, clone this repository:
@@ -33,6 +35,8 @@ Next, click on the tab `Simulation` and you will see the currently active scenar
 
 ![Simulation](https://raw.githubusercontent.com/se-research/kiwi-simulation/master/Simulation.png)
 
+---
+
 ### Controlling Kiwi
 
 If you want to send steering, acceleration, or deceleration commands to the simulated Kiwi, return to the `Overview` tab and activate the button labeled `Code` on the right side; it will turn green.
@@ -46,6 +50,8 @@ actuation.steering = 0.3;
 ```
 
 You can change these values to influence the behavior of the simulated Kiwi car. If you want to accelerate, you can send values like `actuation.motor = 10;`. If you want to go reverse, send `actuation.motor = -10;`. If you want to steer to left, send: `actuation.steering = 0.5;`; steering to the right is `actuation.steering = -0.5;`.
+
+---
 
 ### Parking Kiwi
 
@@ -73,4 +79,24 @@ console.log("Front = " + frontSensor + ", Rear = " + rearSensor + ", Left = " + 
 
 Then, you need to activate the Javascript Console in your web-browser; for Safari, click on Develop-Show JavaScript Console and for Chrome: View-Developer-JavaScript Console. You should see the print out of your values.
 
+---
+
+### Hints
+
+The source code in the code area is executed with 10Hz and hence, the sensor values are updates ten times per seconds as well as the control values are sent to the vehicle by 10 times per second. Furthermore, the code area does not have to possibility to store a variable value throughout one iteration; i.e., a statement like `var oldValue = rearSensor;` and later trying to evaluate the old value from the previous iteration of the code does not work.
+
+Instead, you need to work with so called `sessionStorage` objects [API](https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage) that are persistent through one iteration. You could use it for example as follows:
+
+```Javascript
+// Initialize sessionStorage object:
+if (sessionStorage.getItem("oldRearSensor") === null) {
+    sessionStorage.oldRearSensor = 0;
+}
+...
+// Do something with the old value.
+...
+sessionStorage.oldRearSensor = rearSensor;
+```
+
+These `sessionStorage` objects can also be used to model a state machine that keeps track about the various parking states. You can find further information about a potential parking algorithm design [in this paper](https://arxiv.org/pdf/1406.7768.pdf).
 
